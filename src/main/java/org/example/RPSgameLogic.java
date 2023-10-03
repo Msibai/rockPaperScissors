@@ -121,7 +121,7 @@ public class RPSgameLogic {
                   + round.getComputerPlayerName()
                   + ": "
                   + round.getComputerPlayerMove()
-                  + "   "
+                  + "                  "
                   + "MATCH SCORE : "
                   + round.getHumanPlayerName().toUpperCase()
                   + ": "

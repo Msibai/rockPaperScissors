@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class GameStatistics {
 
-  private final Map<String, ComputerPlayerStatistics> statisticsByPlayerType =
+  private static final Map<String, ComputerPlayerStatistics> statisticsByPlayerType =
       new HashMap<>();
-  private int totalMatches;
-  private int userMatchesWon;
+  private static int totalMatches;
+  private static int userMatchesWon;
 
   public void updateStatistics(Player matchWinner, Player computerPlayer) {
     totalMatches++;
@@ -26,7 +26,7 @@ public class GameStatistics {
     statisticsByPlayerType.put(computerPlayerType, playerStatistics);
   }
 
-  public void displayStatistics() {
+  public static void displayStatistics() {
     double userWinPercentage = (double) userMatchesWon / totalMatches * 100;
     double computerWinPercentage = 100 - userWinPercentage;
 
@@ -41,7 +41,7 @@ public class GameStatistics {
     displayWinPercentagesByComputerType();
   }
 
-  public void displayWinPercentagesByComputerType() {
+  public static void displayWinPercentagesByComputerType() {
     System.out.println("TOTAL MATCHES: " + totalMatches);
     System.out.println("TOTAL MATCHES YOU WON: " + userMatchesWon);
     System.out.println("Your Win Percentages by Computer Player Type:");
