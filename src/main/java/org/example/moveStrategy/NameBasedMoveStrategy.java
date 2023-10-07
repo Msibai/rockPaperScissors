@@ -16,18 +16,11 @@ public class NameBasedMoveStrategy implements PlayerMoveStrategy<Player> {
   }
 
   private String chooseMove(int value) {
-    switch (value) {
-      case 0:
-        return "rock";
-
-      case 1:
-        return "paper";
-
-      case 2:
-        return "scissors";
-
-      default:
-        return "rock";
-    }
+      return switch (value) {
+          case 0 -> "rock";
+          case 1 -> "paper";
+          case 2 -> "scissors";
+          default -> "rock";
+      };
   }
 }

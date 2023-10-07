@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class HumanPlayerMoveStrategy implements PlayerMoveStrategy<Player> {
   @Override
   public String generateMove(Player player) {
-    String[] moves = {"rock", "paper, scissors"};
     Scanner scanner = new Scanner(System.in);
     System.out.println("Please choose your move (rock, paper, or scissors):");
     String move = scanner.next().toLowerCase();
