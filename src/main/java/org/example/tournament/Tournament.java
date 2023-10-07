@@ -3,14 +3,16 @@ package org.example.tournament;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
+import org.example.game.Game;
 import org.example.player.Player;
 
 public class Tournament {
-  private Node tournamentTreeRoot;
+  private final Node tournamentTreeRoot;
+  private final Game game;
 
-  public Tournament(List<Player> participants) {
+  public Tournament(Game game, List<Player> participants) {
     this.tournamentTreeRoot = generateTournamentTree(participants);
+    this.game = game;
   }
 
   private Node generateTournamentTree(List<Player> participants) {
@@ -56,22 +58,7 @@ public class Tournament {
     } else if (rightParticipant == null) {
       return leftParticipant;
     } else {
-      Player matchWinner = getMatchWinner(leftParticipant, rightParticipant);
-      System.out.println(
-          leftParticipant.getName()
-              + " Plays again "
-              + rightParticipant.getName()
-              + " And the Winner is "
-              + matchWinner.getName());
-      return matchWinner;
-    }
-  }
-
-  private Player getMatchWinner(Player player1, Player player2) {
-    if (player1.getName().hashCode() < player2.getName().hashCode()) {
-      return player1;
-    } else {
-      return player2;
+      return game.startTournamentGame(leftParticipant, rightParticipant);
     }
   }
 }
