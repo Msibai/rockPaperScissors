@@ -1,5 +1,6 @@
 package org.example.moveStrategy;
 
+import java.util.Random;
 import org.example.player.Player;
 
 public class NameBasedMoveStrategy implements PlayerMoveStrategy<Player> {
@@ -8,7 +9,13 @@ public class NameBasedMoveStrategy implements PlayerMoveStrategy<Player> {
     String playerName = opponentPlayer.getName();
     int hash = playerName.hashCode();
     int mappedValue = mapHashToRange(hash);
-    return chooseMove(mappedValue);
+
+    Random random = new Random();
+    int randomMove = random.nextInt(3);
+
+    int finalMove = (mappedValue + randomMove) % 3;
+
+    return chooseMove(finalMove);
   }
 
   private int mapHashToRange(int hash) {
@@ -16,11 +23,11 @@ public class NameBasedMoveStrategy implements PlayerMoveStrategy<Player> {
   }
 
   private String chooseMove(int value) {
-      return switch (value) {
-          case 0 -> "rock";
-          case 1 -> "paper";
-          case 2 -> "scissors";
-          default -> "rock";
-      };
+    return switch (value) {
+      case 0 -> "rock";
+      case 1 -> "paper";
+      case 2 -> "scissors";
+      default -> "rock";
+    };
   }
 }
