@@ -38,8 +38,10 @@ public class RPSgame implements Game {
     ComputerPlayerFactory factory = new ComputerPlayerFactory();
     int random = new Random().nextInt(100);
     return switch (selectedComputerPlayerType) {
-      case 0 -> factory.createRandomComputerPlayer("Random Beast " + random, new RandomMoveStrategy());
-      case 1 -> factory.createTimeBasedComputerPlayer("Time Master " + random, new TimeBasedMoveStrategy());
+      case 0 -> factory.createRandomComputerPlayer(
+          "Random Beast " + random, new RandomMoveStrategy());
+      case 1 -> factory.createTimeBasedComputerPlayer(
+          "Time Master " + random, new TimeBasedMoveStrategy());
       case 2 -> factory.createNameBasedComputerPlayer(
           "Tactics Master " + random, new NameBasedMoveStrategy());
       default -> throw new IllegalStateException("Unexpected value: " + selectedComputerPlayerType);
@@ -107,40 +109,45 @@ public class RPSgame implements Game {
 
   @Override
   public void playRound() {
-    String player1Move = player1.makeMove(player2);
-    String player2Move = player2.makeMove(player1);
-    String resultForOneRound = determineRoundWinner(player1Move, player2Move).getName();
-    updateScore(resultForOneRound);
-    roundHistoryList.add(
-        new RoundHistory(
-            player1.getName(),
-            player1Move,
-            player2.getName(),
-            player2Move,
-            player1Score,
-            player2Score));
+    Player winner = null;
 
-    System.out.println(player1.getName() + " played: " + player1Move);
-    System.out.println(player2.getName() + " played: " + player2Move);
-    System.out.println("Result: " + resultForOneRound + "\n");
+    while (winner == null) {
+      String player1Move = player1.makeMove(player2);
+      String player2Move = player2.makeMove(player1);
+      winner = determineRoundWinner(player1Move, player2Move);
+      roundHistoryList.add(
+          new RoundHistory(
+              player1.getName(),
+              player1Move,
+              player2.getName(),
+              player2Move,
+              player1Score,
+              player2Score));
+
+      if (winner != null) {
+        String resultForOneRound = winner.getName();
+        updateScore(resultForOneRound);
+
+        System.out.println(player1.getName() + " played: " + player1Move);
+        System.out.println(player2.getName() + " played: " + player2Move);
+        System.out.println("Result: " + resultForOneRound + "\n");
+      }
+    }
   }
 
   @Override
   public Player determineRoundWinner(String player1Move, String player2Move) {
-    while (true) {
-      if (player1Move.equals(player2Move)) {
-        System.out.println("Tie! Let's play another round.");
-        player1Move = player1.makeMove(player2);
-        player2Move = player2.makeMove(player1);
-      } else if ((player1Move.equals("rock") && player2Move.equals("scissors"))
-          || (player1Move.equals("paper") && player2Move.equals("rock"))
-          || (player1Move.equals("scissors") && player2Move.equals("paper"))) {
-        System.out.println(player1.getName() + " wins!");
-        return player1;
-      } else {
-        System.out.println(player2.getName() + " wins!");
-        return player2;
-      }
+    if (player1Move.equals(player2Move)) {
+      System.out.println("Tie! Let's play another round.");
+      return null;
+    } else if ((player1Move.equals("rock") && player2Move.equals("scissors"))
+        || (player1Move.equals("paper") && player2Move.equals("rock"))
+        || (player1Move.equals("scissors") && player2Move.equals("paper"))) {
+      System.out.println(player1.getName() + " wins!");
+      return player1;
+    } else {
+      System.out.println(player2.getName() + " wins!");
+      return player2;
     }
   }
 
@@ -187,23 +194,24 @@ public class RPSgame implements Game {
   private void displayRoundHistory() {
     System.out.println("\n ROUND HISTORY");
     roundHistoryList.forEach(
-        round -> System.out.println(
-            round.getHumanPlayerName()
-                + ": "
-                + round.getHumanPlayerMove()
-                + "        "
-                + round.getComputerPlayerName()
-                + ": "
-                + round.getComputerPlayerMove()
-                + "   "
-                + "MATCH SCORE : "
-                + round.getHumanPlayerName().toUpperCase()
-                + ": "
-                + round.getHumanPlayerScore()
-                + "       "
-                + round.getComputerPlayerName().toUpperCase()
-                + ": "
-                + round.getComputerPlayerScore()));
+        round ->
+            System.out.println(
+                round.getHumanPlayerName()
+                    + ": "
+                    + round.getHumanPlayerMove()
+                    + "        "
+                    + round.getComputerPlayerName()
+                    + ": "
+                    + round.getComputerPlayerMove()
+                    + "   "
+                    + "MATCH SCORE : "
+                    + round.getHumanPlayerName().toUpperCase()
+                    + ": "
+                    + round.getHumanPlayerScore()
+                    + "       "
+                    + round.getComputerPlayerName().toUpperCase()
+                    + ": "
+                    + round.getComputerPlayerScore()));
     System.out.println("\n");
   }
 
