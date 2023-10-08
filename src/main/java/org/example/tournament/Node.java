@@ -13,6 +13,7 @@ public class Node {
     this.right = null;
   }
 
+
   public Player getParticipant() {
     return participant;
   }

@@ -1,4 +1,4 @@
-package org.example.Menu;
+package org.example.menu;
 
 import java.util.List;
 import org.example.game.RPSgame;

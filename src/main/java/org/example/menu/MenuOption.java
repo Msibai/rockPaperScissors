@@ -1,4 +1,4 @@
-package org.example.Menu;
+package org.example.menu;
 
 public class MenuOption {
     private final int optionNumber;

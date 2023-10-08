@@ -39,6 +39,7 @@ public class Tournament {
     return nodesQueue.poll();
   }
 
+
   public Player startTournament() {
     return playMatch(tournamentTreeRoot);
   }
