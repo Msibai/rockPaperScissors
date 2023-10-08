@@ -3,16 +3,17 @@ package org.example.game;
 import org.example.player.Player;
 
 public interface Game {
-    void startSingleGame();
+  void startSingleGame(String playerName);
 
-    Player startTournamentGame(Player player1, Player player2);
+  Player startTournamentGame(Player player1, Player player2);
 
-    void playRound();
+  void playRound();
 
-    Player determineRoundWinner();
-    void updateScore();
+  Player determineRoundWinner(String player1Move, String player2Move);
 
-    boolean isGameOver();
+  void updateScore(String roundWinner);
 
-    Player determineGameWinner();
+  boolean isGameOver(int totalWinNeeded);
+
+  Player determineGameWinner();
 }

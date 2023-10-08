@@ -18,10 +18,6 @@ public class MenuSystem implements MenuState{
         activeMenu = selectedMenu;
     }
 
-    public static String getCurrentState(){
-        return activeMenu.getClass().getSimpleName();
-    }
-
     @Override
     public int hashCode() {
         return super.hashCode();
