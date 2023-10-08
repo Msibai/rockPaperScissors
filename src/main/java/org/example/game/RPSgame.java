@@ -115,14 +115,6 @@ public class RPSgame implements Game {
       String player1Move = player1.makeMove(player2);
       String player2Move = player2.makeMove(player1);
       winner = determineRoundWinner(player1Move, player2Move);
-      roundHistoryList.add(
-          new RoundHistory(
-              player1.getName(),
-              player1Move,
-              player2.getName(),
-              player2Move,
-              player1Score,
-              player2Score));
 
       if (winner != null) {
         String resultForOneRound = winner.getName();
@@ -132,6 +124,14 @@ public class RPSgame implements Game {
         System.out.println(player2.getName() + " played: " + player2Move);
         System.out.println("Result: " + resultForOneRound + "\n");
       }
+      roundHistoryList.add(
+          new RoundHistory(
+              player1.getName(),
+              player1Move,
+              player2.getName(),
+              player2Move,
+              player1Score,
+              player2Score));
     }
   }
 
