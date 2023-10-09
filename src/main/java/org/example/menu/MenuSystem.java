@@ -1,4 +1,4 @@
-package org.example.Menu;
+package org.example.menu;
 
 public class MenuSystem implements MenuState{
 
@@ -16,10 +16,6 @@ public class MenuSystem implements MenuState{
 
     public static void setState(MenuState selectedMenu){
         activeMenu = selectedMenu;
-    }
-
-    public static String getCurrentState(){
-        return activeMenu.getClass().getSimpleName();
     }
 
     @Override

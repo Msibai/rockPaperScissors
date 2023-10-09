@@ -1,9 +1,9 @@
-package org.example.Menu;
+package org.example.menu;
 
 public class MenuOption {
-    private int optionNumber;
-    private String text;
-    private Runnable action;
+    private final int optionNumber;
+    private final String text;
+    private final Runnable action;
 
 
     public MenuOption(int optionNumber, String text, Runnable action){

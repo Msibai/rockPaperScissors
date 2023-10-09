@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.Menu.MenuSystem;
+import org.example.menu.MenuSystem;
 
 public class RockPaperScissors {
 
